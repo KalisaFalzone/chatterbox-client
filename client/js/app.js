@@ -75,18 +75,27 @@ $(function(){
     },
     addMessage: function(message){
       var $container = $(document.createElement('div'));
-      $container.addClass("chat") //container
-      var $username = $(document.createElement('p'));
-      $username.html(_.escape(message.username)+":");
-      $username.addClass("username");
+      $container.addClass("chat s12 z-depth-2 teal white-text");
+      var $row = $(document.createElement('div'));
+      $row.addClass("row");
+      var $title = $(document.createElement('h6'));
+      $title.addClass("col s12 left");
+      $title.html("<b>" + _.escape(message.username)+ " </b>("+ _.escape(message.roomname)+")");
       var $message = $(document.createElement('p'));
-      $message.addClass("message");
+      $message.addClass("col s12");
       $message.html(_.escape(message.text));
-      var $room = $(document.createElement('p'));
-      $room.html(_.escape(message.roomname));
-      $container.append($username);
-      $container.append($message);
-      $container.append($room);
+      // $container.addClass("chat col s12 left") //container
+      // var $username = $(document.createElement('p'));
+      // $username.html(_.escape(message.username)+":");
+      // $username.addClass("username");
+      // var $message = $(document.createElement('p'));
+      // $message.addClass("message");
+      // $message.html(_.escape(message.text));
+      // var $room = $(document.createElement('p'));
+      // $room.html(_.escape(message.roomname));
+      $row.append($title);
+      $row.append($message);
+      $container.append($row);
       $('#chats').append($container);
     },
     addRoom: function(roomName){
