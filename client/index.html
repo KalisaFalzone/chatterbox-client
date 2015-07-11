@@ -19,13 +19,13 @@
     <div id="main">
       <h1>chatterbox</h1>
       <select id="roomSelect">
-        <option selected value="lobby">Lobby</option>
+        <!-- <option selected value="lobby">Lobby</option>
         <option value="number2">number2</option>
-        <option value="number3">number3</option>
+        <option value="number3">number3</option> -->
       </select> <br>
 
-      Message:<input id="inputField" type="text" name="message" value="" placeholder="enter message here">
-      <input type="button" value="submit" id="submitButton">
+      Message:<input id="message" type="text" name="message" value="" placeholder="enter message here">
+      <input type="button" value="submit" id="send">
       <br>
       Room:<input id="roomField" type="text" name="room" value="" placeholder="create a room">
       <input type="button" value="create room" id="roomButton">
@@ -34,14 +34,7 @@
       <div id="chats"></div>
     </div>
     <script type="text/javascript">
-      $('#submitButton').on("click",function(){
-        var message = {
-          username: app.username,
-          text: $('#inputField').val(),
-          roomname: $('#roomSelect').val()
-        };
-        app.send(message);
-      });
+      $('#send').on("click",app.handleSubmit);
     </script>
   </body>
 </html>
