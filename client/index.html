@@ -29,12 +29,17 @@
       <br>
       Room:<input id="roomField" type="text" name="room" value="" placeholder="create a room">
       <input type="button" value="create room" id="roomButton">
+      <input type="button" value="refresh messages" id="refreshButton">
       <br>
       </form>
       <div id="chats"></div>
     </div>
     <script type="text/javascript">
       $('#send').on("click",app.handleSubmit);
+      $('#refreshButton').on("click",app.init);
+      $('#roomButton').on('click', function(){
+        app.addRoom($('#roomField').val());
+      });
     </script>
   </body>
 </html>

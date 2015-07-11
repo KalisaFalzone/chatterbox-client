@@ -2,9 +2,7 @@
 
 // TODO:
 /*
-Get create room button to work
 Filter messages by room - case insensitive
-Finish app.init
 adding friends
 CSS - materialize
 */
@@ -17,13 +15,8 @@ $(function(){
     rooms:{"lobby":"lobby"},
     messages: [],
     init: function(){
-      // Fetch all of the Data - place in an array of objects
-      // Build roomList
-      console.log(app.rooms);
-      for (var key in app.rooms){
-        app.addRoom(key);
-      }
-      // Display messages
+      //setInterval(app.fetch.bind(app),5000);
+      app.fetch();
       console.log("init");
     },
     fetch: function(){
@@ -34,14 +27,12 @@ $(function(){
         data: JSON.stringify(message), // data: {order: "-createdAt"},
         contentType: 'application/json',
         success: function (data) {
-          console.log(data.results);
-          // console.log(_.pluck(data.results,"roomName"));
+          console.log("success");
           app.messages = data.results;
           for(var i=0; i<data.results.length; i++){
             app.rooms[data.results[i].roomName] = data.results[i].roomName;
-            // console.log(_.pluck(data.results[i],"roomname"));
-            console.log(data.results[i]);
           }
+        app.refresh();
         },
         error: function (data) {
           // See: https://developer.mozilla.org/en-US/docs/Web/API/console.error
@@ -59,6 +50,7 @@ $(function(){
         contentType: 'application/json',
         success: function (data) {
           console.log('chatterbox: Message sent');
+          app.refresh();
         },
         error: function (data) {
           // See: https://developer.mozilla.org/en-US/docs/Web/API/console.error
@@ -70,12 +62,13 @@ $(function(){
     displayMessages: function(){ // filter by room
       console.log("displaying", this.messages.length);
       for(var i = 0; i< this.messages.length; i++){
-        this.addMessage(this.messages[i]);
+        app.addMessage(this.messages[i]);
       }
     },
     refresh:function(){
-      this.clearMessages();
-      this.displayMessages();
+      app.clearMessages();
+      app.displayMessages();
+      app.refreshRooms();
     },
     clearMessages: function(){
       $("#chats").empty();
@@ -84,20 +77,27 @@ $(function(){
       var $container = $(document.createElement('div'));
       $container.addClass("chat") //container
       var $username = $(document.createElement('p'));
-      $username.html(message.username+":");
+      $username.html(_.escape(message.username)+":");
       $username.addClass("username");
       var $message = $(document.createElement('p'));
       $message.addClass("message");
       $message.html(_.escape(message.text));
+      var $room = $(document.createElement('p'));
+      $room.html(_.escape(message.roomname));
       $container.append($username);
       $container.append($message);
+      $container.append($room);
       $('#chats').append($container);
-      console.log("addMessage");
     },
     addRoom: function(roomName){
-      if (_.indexOf(this.rooms,roomName) < 1){
-        $('#roomSelect').append('<option value='+roomName+'>'+roomName+'</option>');
         app.rooms[roomName] = roomName;
+        $('#roomSelect').append('<option value='+roomName+'>'+roomName+'</option>');
+
+    },
+    refreshRooms: function(){
+      $('#roomSelect').html("");
+      for(var key in app.rooms){
+        app.addRoom(key);
       }
     },
     addFriend: function(){},
