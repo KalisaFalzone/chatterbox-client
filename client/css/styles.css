@@ -3,10 +3,27 @@ body {
     text-align: center;
     padding: 0 25px;
     font-family: arial, sans-serif;
+    background-image: url(../appBackground.png);
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center center;
 }
 
 .leftCol{
     position: fixed;
+    height: 100%;
+}
+
+#space{
+    height:40px;
+}
+.#message{
+    background-color: white;
+}
+
+.border{
+  border: 5px solid grey;
 }
 /*#main {
     width: 500px;
