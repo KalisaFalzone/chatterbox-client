@@ -6,6 +6,7 @@ $(function(){
   app = {
 
     username: "hiii",
+    rooms:["lobby"],
     init: function(){
       console.log("init");},
     fetch: function(){
@@ -50,20 +51,25 @@ $(function(){
     },
     addMessage: function(message){
       var $container = $(document.createElement('div'));
-      $container.addClass("messageContainer") //container
+      $container.addClass("chat") //container
       var $username = $(document.createElement('p'));
       $username.html(message.username+":");
       $username.addClass("username");
       var $message = $(document.createElement('p'));
       $message.addClass("message");
-      $message.html(message.message);
+      $message.html(message.text);
       $container.append($username);
       $container.append($message);
       $('#chats').append($container);
 
 
     },
-    addRoom: function(){},
+    addRoom: function(roomName){
+      if (_.indexOf(this.rooms,roomName) < 1){
+        $('#roomSelect').append('<option value='+roomName+'>'+roomName+'</option>');
+        this.rooms.push(roomName);
+      }
+    },
     addFriend: function(){},
     handleSubmit: function(){}
 
