@@ -5,7 +5,7 @@ var app;
 $(function(){
   app = {
 
-    username: "hi",
+    username: "hiii",
     init: function(){
       console.log("init");},
     fetch: function(){
@@ -48,7 +48,19 @@ $(function(){
     clearMessages: function(){
       $("#chats").empty();
     },
-    addMessage: function(){
+    addMessage: function(message){
+      var $container = $(document.createElement('div'));
+      $container.addClass("messageContainer") //container
+      var $username = $(document.createElement('p'));
+      $username.html(message.username+":");
+      $username.addClass("username");
+      var $message = $(document.createElement('p'));
+      $message.addClass("message");
+      $message.html(message.message);
+      $container.append($username);
+      $container.append($message);
+      $('#chats').append($container);
+
 
     },
     addRoom: function(){},

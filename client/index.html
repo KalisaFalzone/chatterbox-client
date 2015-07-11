@@ -28,11 +28,15 @@
     </div>
     <script type="text/javascript">
       $('#submitButton').on("click",function(){
-            console.log("button");
-            var input = $('#inputField').val();
-
-            app.send("input");
-          });
+        var input = $('#inputField').val();
+        // TODO:  create message object and pass to send function
+         var message = {
+          username: app.username,
+          text: input,
+          roomname: ''
+          };
+        app.send(message);
+      });
     </script>
   </body>
 </html>
