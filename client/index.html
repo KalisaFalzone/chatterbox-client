@@ -49,7 +49,7 @@
               <label>Create Room:</label>
             </div>
             <div class="col s12">
-              <a id="roomButton"class="waves-effect waves-light btn">create</a>
+              <a id="roomButton"class="teal waves-effect waves-light btn">create</a>
             </div>
             <div class="teal-text text-darken 4">
               <label>Browser Select</label>
@@ -68,12 +68,20 @@
               <label>Message:</label>
             </div>
             <div class="col s3">
-              <a id="send"class="waves-effect waves-light btn">submit</a>
-<!--               <p>test</p>
- -->            </div>
+<!--               <a id="send"class="waves-effect waves-light btn">submit</a>
+ -->              <p class ="test">
+                <div class="teal-text text-darken 4">
+                <label>Message:</label>
+                  <select id="roomPick" class="browser-default">
+                    <option value="" disabled selected>Select Room</option>
+                  </select>
+              </div>
+            </p>
+            <a id="send"class="teal waves-effect waves-light btn">submit</a>
+            </div>
           </div>
           <div class="col s12 ">
-            <a id="refreshButton"class="waves-effect waves-light btn">refresh</a>
+            <a id="refreshButton"class="teal waves-effect waves-light btn">refresh</a>
           </div>
         </div>
         <div class="divider"></div>

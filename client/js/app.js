@@ -11,7 +11,7 @@ var app;
 $(function(){
   app = {
     server: 'https://api.parse.com/1/classes/chatterbox',
-    username: "hiii",
+    username: "very_doge",
     rooms:{"lobby":"lobby"},
     messages: [],
     init: function(){
@@ -30,7 +30,7 @@ $(function(){
           console.log("success");
           app.messages = data.results;
           for(var i=0; i<data.results.length; i++){
-            app.rooms[data.results[i].roomName] = data.results[i].roomName;
+            app.rooms[data.results[i].roomname] = data.results[i].roomname;
           }
         app.refresh();
         },
@@ -101,10 +101,12 @@ $(function(){
     addRoom: function(roomName){
         app.rooms[roomName] = roomName;
         $('#roomSelect').append('<option value='+roomName+'>'+roomName+'</option>');
+        $('#roomPick').append('<option value='+roomName+'>'+roomName+'</option>');
 
     },
     refreshRooms: function(){
       $('#roomSelect').html("");
+      $('#roomPick').html("");
       for(var key in app.rooms){
         app.addRoom(key);
       }
@@ -114,7 +116,7 @@ $(function(){
       var message = {
         username: app.username,
         text: $('#message').val(),
-        roomname: $('#roomSelect').val()
+        roomname: $('#roomPick').val()
       };
       app.send(message);
       app.refresh();
